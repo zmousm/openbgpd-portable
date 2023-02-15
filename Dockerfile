@@ -37,7 +37,7 @@ ARG PORTABLE_COMMIT
 ARG OPENBSD_GIT
 ARG OPENBSD_COMMIT
 
-COPY openbgpd.pub entrypoint.sh healthcheck.sh /
+COPY openbgpd.pub entrypoint.sh healthcheck.sh 0001-rrfix.patch /
 RUN set -x && \
   chmod +x /entrypoint.sh /healthcheck.sh
 
@@ -53,6 +53,7 @@ RUN set -x && \
     tar xfz openbgpd-${VERSION}.tar.gz && \
     rm -f openbgpd-${VERSION}.tar.gz && \
     cd openbgpd-${VERSION}; \
+    patch -p1 < /0001-rrfix.patch; rm /0001-rrfix.patch; \
   else \
     git clone ${PORTABLE_GIT:-https://github.com/openbgpd-portable/openbgpd-portable.git} && \
     cd openbgpd-portable && \

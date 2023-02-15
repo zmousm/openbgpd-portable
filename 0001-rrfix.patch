@@ -1,0 +1,11 @@
+--- a/src/bgpd/rde.c	2022-10-03 18:20:06.000000000 +0300
++++ b/src/bgpd/rde.c	2023-01-12 19:59:10.540874769 +0200
+@@ -1122,7 +1122,7 @@
+ 			    "route refresh: bad AID %d", rr.aid);
+ 			break;
+ 		}
+-		if (peer->capa.mp[rr.aid]) {
++		if (peer->capa.mp[rr.aid] == 0) {
+ 			log_peer_warnx(&peer->conf,
+ 			    "route refresh: AID %s not negotiated",
+ 			    aid2str(rr.aid));
